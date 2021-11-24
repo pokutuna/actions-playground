@@ -5,13 +5,12 @@ import (
 	"fmt"
 	"log"
 
-	"google.golang.org/api/option"
 	"google.golang.org/api/sheets/v4"
 )
 
 func main() {
 	ctx := context.Background()
-	client, err := sheets.NewService(ctx, option.WithQuotaProject("pokutuna-playground"))
+	client, err := sheets.NewService(ctx)
 	if err != nil {
 		log.Fatalf("Unable to retrieve Sheets client: %v", err)
 	}
