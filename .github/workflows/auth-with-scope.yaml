@@ -16,11 +16,11 @@ jobs:
       name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v0.4.0
       with:
-        token_format: access_token
         workload_identity_provider: projects/744005832574/locations/global/workloadIdentityPools/workload-identity-test/providers/github-provider-test
         service_account: workload-identity-test@pokutuna-playground.iam.gserviceaccount.com
-        access_token_scopes:
-        - https://www.googleapis.com/auth/spreadsheets.readonly
+        token_format: access_token
+        access_token_scopes: |-
+          https://www.googleapis.com/auth/spreadsheets.readonly
 
     - uses: actions/checkout@v2
 
