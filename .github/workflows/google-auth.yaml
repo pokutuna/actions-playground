@@ -26,4 +26,4 @@ jobs:
           --header "Authorization: Bearer ${{ steps.auth.outputs.access_token }}"
 
     - name: Check Application Default Credential
-      run: ls -l ~/.config/gcloud
+      run: ls -l ${{ steps.auth.outputs.credentials_file_path }}
