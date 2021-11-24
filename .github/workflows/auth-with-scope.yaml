@@ -20,7 +20,6 @@ jobs:
         service_account: workload-identity-test@pokutuna-playground.iam.gserviceaccount.com
         token_format: access_token
         access_token_scopes: |-
-          https://www.googleapis.com/auth/cloud-platform
           https://www.googleapis.com/auth/spreadsheets.readonly
 
     - uses: actions/checkout@v2
