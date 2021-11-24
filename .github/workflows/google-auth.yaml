@@ -24,3 +24,6 @@ jobs:
       run: |-
         curl https://secretmanager.googleapis.com/v1/projects/pokutuna-playground/secrets/hello/versions/latest:access \
           --header "Authorization: Bearer ${{ steps.auth.outputs.access_token }}"
+
+    - name: Check Application Default Credential
+      run: ls -l ~/.config/gcloud
