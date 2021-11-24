@@ -1,0 +1,28 @@
+name: google-auth
+
+on:
+  workflow_dispatch:
+
+jobs:
+  auth-test:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+    - id: auth
+      name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v0.4.0
+      with:
+        token_format: access_token
+        workload_identity_provider: projects/744005832574/locations/global/workloadIdentityPools/workload-identity-test/providers/github-provider-test
+        service_account: workload-identity-test@pokutuna-playground.iam.gserviceaccount.com
+
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-go@v2
+
+    - run: go run main.go
+      working-directory: ./examples/access-secrets
