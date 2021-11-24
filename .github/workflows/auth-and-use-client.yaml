@@ -1,4 +1,4 @@
-name: google-auth
+name: auth-and-use-client
 
 on:
   workflow_dispatch:
