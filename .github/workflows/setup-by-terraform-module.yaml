@@ -1,0 +1,32 @@
+name: setup-by-terraform-module
+
+# Set up with
+# https://registry.terraform.io/modules/terraform-google-modules/github-actions-runners/google/latest/submodules/gh-oidc
+
+on:
+  workflow_dispatch:
+
+jobs:
+  auth-test:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+    - id: auth
+      name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v0.4.0
+      with:
+        token_format: access_token
+        workload_identity_provider: projects/423703623203/locations/global/workloadIdentityPools/example-pool/providers/example-gh-provider
+        service_account: google-github-actions-test@pokutuna-playground-oidc.iam.gserviceaccount.com
+
+    - name: Access secret
+      run: |-
+        curl https://secretmanager.googleapis.com/v1/projects/pokutuna-playground-oidc/secrets/hello/versions/latest:access \
+          --header "Authorization: Bearer ${{ steps.auth.outputs.access_token }}"
+
+    - name: Check Application Default Credential
+      run: ls -l ${{ steps.auth.outputs.credentials_file_path }}
